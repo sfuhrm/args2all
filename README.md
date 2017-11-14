@@ -5,6 +5,8 @@ into a variety of human readable text documents.
 
 The main purpose is to reduce overhead when documenting software.
 
+Two examples can be seen below.
+
 ## Command line options
 
 Usage is as follows:
@@ -48,11 +50,23 @@ read the current options in the next sections.
 
 Outputs a markdown text that is inspired by the layout of UN*X manual pages.
 
+Here's an example of the program itself:
+
+![Markdown example](https://raw.githubusercontent.com/sfuhrm/args2all/master/examples/markdown.png "Markdown example")
+
+Markdown code can be seen [here](https://raw.githubusercontent.com/sfuhrm/args2all/master/examples/args2all.md).
+
 #### Manpage
 
 Outputs a partial manual page / troff page that can be used as a
 template. The parts of the file that need to be filled are
 marked as pseudo-variables, for example `$DESCRIPTION`.
+
+Here's an example of the program itself:
+
+![Manpage example](https://raw.githubusercontent.com/sfuhrm/args2all/master/examples/manpage.png "Manpage example")
+
+Manpage code can be seen [here](https://raw.githubusercontent.com/sfuhrm/args2all/master/examples/args2all.1).
 
 ## License
 
