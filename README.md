@@ -1,7 +1,9 @@
 # Args2All
 
-Converts machine readable command line parser library object descriptions (args4j, JCommander)
-into a variety of human readable text documents. 
+Converts machine readable command line parser library class annotations (args4j, JCommander)
+into a variety of human readable text documents. To put it in other words: You document
+your options for i.e. args4j, and then you can extract the information for other documents
+using this tool from your Java classes.
 
 The main purpose is to reduce overhead when documenting software.
 
