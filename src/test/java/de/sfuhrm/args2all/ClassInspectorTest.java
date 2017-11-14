@@ -19,7 +19,6 @@ package de.sfuhrm.args2all;
 
 import de.sfuhrm.args2all.model.ModelBase;
 import de.sfuhrm.args2all.model.ModelParameter;
-import de.sfuhrm.args2all.model.NamedModelParameter;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
@@ -38,20 +37,19 @@ public final class ClassInspectorTest {
         ModelBase modelBase = classInspector.inspect(Args4jExample.class);
 
         List<? super ModelParameter> expected = new ArrayList<>();
-        NamedModelParameter modelParameter = new NamedModelParameter(Args4jExample.class.getDeclaredField("myField"));
+        ModelParameter modelParameter;
+        modelParameter = new ModelParameter(Args4jExample.class.getDeclaredField("arguments"));
+        modelParameter.setDescription("The list of planets to visit");
+        modelParameter.setValueClass(List.class);
+        expected.add(modelParameter);
+        modelParameter = new ModelParameter(Args4jExample.class.getDeclaredField("myField"));
         modelParameter.setNames(Arrays.asList("-mars"));
-        modelParameter.setDescription("");
         modelParameter.setValueClass(String.class);
         expected.add(modelParameter);
-        modelParameter = new NamedModelParameter(Args4jExample.class.getDeclaredField("myField2"));
-        modelParameter.setNames(Arrays.asList("--saturn", "--uranus", "--jupiter"));
-        modelParameter.setDescription("");
+        modelParameter = new ModelParameter(Args4jExample.class.getDeclaredField("myField2"));
+        modelParameter.setNames(Arrays.asList("-saturn", "-uranus", "-jupiter"));
         modelParameter.setValueClass(Integer.class);
         expected.add(modelParameter);
-        ModelParameter parameter = new ModelParameter(Args4jExample.class.getDeclaredField("arguments"));
-        parameter.setDescription("The list of planets to visit");
-        parameter.setValueClass(List.class);
-        expected.add(parameter);
 
         assertEquals(Args4jExample.class, modelBase.getReference());
         assertEquals(expected, modelBase.getParameters());
@@ -63,20 +61,21 @@ public final class ClassInspectorTest {
         ModelBase modelBase = classInspector.inspect(JCommanderExample.class);
 
         List<? super ModelParameter> expected = new ArrayList<>();
-        NamedModelParameter modelParameter = new NamedModelParameter(JCommanderExample.class.getDeclaredField("myField"));
+        ModelParameter modelParameter = new ModelParameter(JCommanderExample.class.getDeclaredField("myField"));
         modelParameter.setNames(Arrays.asList("-mars"));
-        modelParameter.setDescription("");
         modelParameter.setValueClass(String.class);
+        modelParameter.setOrder(1);
         expected.add(modelParameter);
-        modelParameter = new NamedModelParameter(JCommanderExample.class.getDeclaredField("myField2"));
+        modelParameter = new ModelParameter(JCommanderExample.class.getDeclaredField("myField2"));
         modelParameter.setNames(Arrays.asList("--saturn", "--uranus", "--jupiter"));
-        modelParameter.setDescription("");
         modelParameter.setValueClass(Integer.class);
+        modelParameter.setOrder(2);
         expected.add(modelParameter);
-        ModelParameter parameter = new ModelParameter(JCommanderExample.class.getDeclaredField("arguments"));
-        parameter.setDescription("The list of planets to visit");
-        parameter.setValueClass(List.class);
-        expected.add(parameter);
+        modelParameter = new ModelParameter(JCommanderExample.class.getDeclaredField("arguments"));
+        modelParameter.setDescription("The list of planets to visit");
+        modelParameter.setValueClass(List.class);
+        modelParameter.setOrder(3);
+        expected.add(modelParameter);
 
         assertEquals(JCommanderExample.class, modelBase.getReference());
         assertEquals(expected, modelBase.getParameters());

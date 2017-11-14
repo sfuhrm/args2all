@@ -10,15 +10,15 @@ import java.util.List;
 
 public class JCommanderExample {
     @Getter @Setter
-    @Parameter(names = "-mars")
+    @Parameter(names = "-mars", order = 1)
     private String myField;
 
     @Getter @Setter
-    @Parameter(names = {"--saturn", "--uranus", "--jupiter"})
+    @Parameter(names = {"--saturn", "--uranus", "--jupiter"}, order = 2)
     private Integer myField2;
 
     // unnamed
     @Getter @Setter
-    @Parameter(description = "The list of planets to visit")
+    @Parameter(description = "The list of planets to visit", order = 3)
     private List<String> arguments;
 }

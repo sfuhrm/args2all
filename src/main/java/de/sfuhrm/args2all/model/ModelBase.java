@@ -21,10 +21,13 @@ public final class ModelBase {
     @Getter @Setter
     private Class<?> reference;
 
+    /** The names in the command line for this field. */
+    @Getter @Setter
+    private List<String> names;
 
     /** The parameters for the referenced entity. */
     @Getter @Setter
-    private List<? super ModelParameter> parameters;
+    private List<ModelParameter> parameters;
 
     /** Construct a new instance. */
     public ModelBase() {
@@ -50,7 +53,7 @@ public final class ModelBase {
      * */
     public Optional<ModelParameter> getNameless() {
         return parameters.stream()
-                .filter(p -> p.getClass().equals(ModelParameter.class))
+                .filter(p -> p.getNames().isEmpty())
                 .map(p -> (ModelParameter) p)
                 .findFirst();
     }
@@ -60,19 +63,26 @@ public final class ModelBase {
      * two nameless parameters, {@code foo} and {@code bar}.
      * @return the namefull parameters.
      * */
-    public List<NamedModelParameter> getNamefull() {
-
-        Comparator<NamedModelParameter> cmp =
-                Comparator.comparingInt(NamedModelParameter::getOrder)
-                .thenComparing(
-                        Comparator.comparing(
-                                p -> p.getNames().get(0).toUpperCase()));
-
-        List<NamedModelParameter> result = parameters.stream()
-                .filter(p -> p.getClass().equals(NamedModelParameter.class))
-                .map(p -> (NamedModelParameter) p)
-                .sorted(cmp)
+    public List<ModelParameter> getNamefull() {
+        List<ModelParameter> result = parameters.stream()
+                .filter(p -> !p.getNames().isEmpty())
                 .collect(Collectors.toList());
         return result;
     }
+
+    /** The comparator used to order the named model parameters.
+     * Uses first the {@linkplain ModelParameter#getOrder() order}
+     * and then the {@linkplain ModelParameter#getNames() first name}
+     * as sort keys.
+     * */
+    public static final Comparator<ModelParameter> COMPARATOR =
+            Comparator.comparingInt(ModelParameter::getOrder)
+                    .thenComparing(q ->
+                            { if (q.getNames().isEmpty()) {
+                                return "";
+                                } else {
+                                    return q.getNames().get(0);
+                                }
+                            },
+                            String.CASE_INSENSITIVE_ORDER);
 }

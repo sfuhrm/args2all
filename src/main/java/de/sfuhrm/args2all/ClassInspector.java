@@ -2,11 +2,11 @@ package de.sfuhrm.args2all;
 
 import de.sfuhrm.args2all.model.ModelBase;
 import de.sfuhrm.args2all.model.ModelParameter;
-import de.sfuhrm.args2all.model.NamedModelParameter;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.stream.Collectors;
 
 /** Converts command line parser specific POJO classes to the
@@ -65,6 +65,8 @@ public final class ClassInspector {
                         }
                     }
                 );
+
+        Collections.sort(result.getParameters(), ModelBase.COMPARATOR);
         return result;
     }
 
@@ -76,7 +78,7 @@ public final class ClassInspector {
     private ModelParameter handleField(
                    final Field field,
                    final org.kohsuke.args4j.Option parameter) {
-        NamedModelParameter modelParameter = new NamedModelParameter(field);
+        ModelParameter modelParameter = new ModelParameter(field);
         modelParameter.getNames().add(parameter.name());
         if (parameter.aliases() != null) {
             modelParameter.getNames().addAll(Arrays.asList(parameter.aliases())
@@ -114,8 +116,8 @@ public final class ClassInspector {
                    final com.beust.jcommander.Parameter parameter) {
         ModelParameter modelParameter;
         if (parameter.names().length > 0) {
-            modelParameter = new NamedModelParameter(field);
-            ((NamedModelParameter) modelParameter)
+            modelParameter = new ModelParameter(field);
+            (modelParameter)
                     .setNames(Arrays.asList(parameter.names())
                     .stream()
                     .collect(Collectors.toList()));

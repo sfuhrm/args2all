@@ -13,7 +13,7 @@ public class Args4jExample {
     private String myField;
 
     @Getter @Setter
-    @Option(name = "--saturn", aliases = {"--uranus", "--jupiter"})
+    @Option(name = "-saturn", aliases = {"-uranus", "-jupiter"})
     private Integer myField2;
 
     // unnamed

@@ -6,6 +6,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /** A parameter associated to a field. */
@@ -18,6 +20,10 @@ public class ModelParameter {
     @Getter
     @Setter
     private Field reference;
+
+    /** The names in the command line for this field. */
+    @Getter @Setter
+    private List<String> names;
 
     /** The human readable description in the help text for this parameter. */
     @Getter @Setter
@@ -44,5 +50,6 @@ public class ModelParameter {
      * */
     public ModelParameter(final Field myReference) {
         this.reference = Objects.requireNonNull(myReference);
+        this.names = new ArrayList<>();
     }
 }
