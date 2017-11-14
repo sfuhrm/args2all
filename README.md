@@ -5,7 +5,7 @@ into a variety of human readable text documents.
 
 The main purpose is to reduce overhead when documenting software.
 
-Two examples can be seen below.
+Two examples can be seen [below](#output-formats-supported).
 
 ## Command line options
 
