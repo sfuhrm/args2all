@@ -1,0 +1,34 @@
+'\" t
+.\" (The preceding line is a note to broken versions of man to tell
+.\" them to pre-process this man page with tbl)
+.\" Man page for pmap.
+.\" Licensed under version 2 of the GNU General Public License.
+.\" Written by Albert Cahalan.
+.\"
+.TH $PROGRAMNAME "1" "$MONTH $YEAR"
+.SH NAME
+$PROGRAMNAME \- $PROGRAMDESCRIPTION
+.SH SYNOPSIS
+.B $PROGRAMNAME
+[\fIoptions\fR] 
+.SH DESCRIPTION
+$DESCRIPTION
+
+.SH OPTIONS
+.TP
+
+.TP
+\fB\-charset\fR, \fB\-C\fR \fICHARSET\fR
+The charset encoding to use for the output file.
+.TP
+\fB\-class\fR, \fB\-c\fR \fICLASS\fR
+Name of the annotated class to read. The annotations are from a library like args4j or JCommander. Note that the class must be loadable from the programs context, meaning reachable from the classpath.
+.TP
+\fB\-help\fR, \fB\-h\fR 
+Show the command line help.
+.TP
+\fB\-out\fR, \fB\-o\fR \fIFILE\fR
+The output where to write the result to.
+.TP
+\fB\-template\fR, \fB\-t\fR 
+The template to use for output. This is the output flavor you are desiring to generate.
