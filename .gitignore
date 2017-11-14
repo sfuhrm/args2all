@@ -1,0 +1,9 @@
+/out/
+/target/
+/log/
+*~
+.classpath
+.project
+.settings/
+nb-configuration.xml
+nbactions.xml
