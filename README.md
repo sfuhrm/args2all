@@ -17,9 +17,9 @@ Usage is as follows:
     
 Where the possible options are listed here (args2all-generated):    
 
-* **-help, -h**
+* **-charset, -C** *=* *CHARSET*
 
-  Show the command line help.
+  The charset encoding to use for the output file.
 
   
 * **-class, -c** *=* *CLASS*
@@ -27,14 +27,9 @@ Where the possible options are listed here (args2all-generated):
   Name of the annotated class to read. The annotations are from a library like args4j or JCommander. Note that the class must be loadable from the programs context, meaning reachable from the classpath.
 
   *Required*
-* **-template, -t**
+* **-help, -h**
 
-  The template to use for output. This is the output flavor you are desiring to generate.
-
-  
-* **-charset, -C** *=* *CHARSET*
-
-  The charset encoding to use for the output file.
+  Show the command line help.
 
   
 * **-out, -o** *=* *FILE*
@@ -42,6 +37,10 @@ Where the possible options are listed here (args2all-generated):
   The output where to write the result to.
 
   *Required*
+* **-template, -t**
+
+  The template to use for output. This is the output flavor you are desiring to generate.
+
 
 ### Output formats supported
 
