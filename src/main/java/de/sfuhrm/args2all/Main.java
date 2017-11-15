@@ -19,6 +19,7 @@
 package de.sfuhrm.args2all;
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import de.sfuhrm.args2all.model.ModelBase;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -123,6 +124,10 @@ public final class Main {
         XmlMapper xmlMapper = new XmlMapper();
         StringWriter stringWriter = new StringWriter();
         try {
+            xmlMapper.configure(ToXmlGenerator.Feature.WRITE_XML_1_1,
+                    true);
+            xmlMapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION,
+                    true);
             xmlMapper.writeValue(stringWriter, modelBase);
         } catch (IOException e) {
             throw new ArgsException(e);
