@@ -70,11 +70,10 @@ public final class ModelBase {
      * two nameless parameters, {@code foo} and {@code bar}.
      * @return the optional nameless parameter.
      * */
-    public Optional<ModelParameter> getNameless() {
+    public List<ModelParameter> getNameless() {
         return parameters.stream()
                 .filter(p -> p.getNames().isEmpty())
-                .map(p -> (ModelParameter) p)
-                .findFirst();
+                .collect(Collectors.toList());
     }
 
     /** Get the namefull parameters.
