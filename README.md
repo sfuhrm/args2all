@@ -14,6 +14,7 @@ Two examples can be seen [below](#output-formats-supported).
 Currently the following command line libraries are supported:
 * [Args4j](https://github.com/kohsuke/args4j)
 * [JCommander](https://github.com/cbeust/jcommander)
+* [PicoCLI](https://github.com/remkop/picocli)
 
 ## Command line options
 
@@ -75,6 +76,11 @@ Here's an example of the program itself:
 
 Manpage code can be seen [here](https://raw.githubusercontent.com/sfuhrm/args2all/master/examples/args2all.1).
 
+#### XML
+
+Outputs a XML dump that can be used for example in XML stylesheets.
+
+XML page example is located [here](https://raw.githubusercontent.com/sfuhrm/args2all/master/examples/args2all.xml).
 
 ### Warnings
 
