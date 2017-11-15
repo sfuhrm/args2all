@@ -1,4 +1,27 @@
 language: java
+env:
+  global:
+    - VERSION: 0.0.1
 jdk:
   - openjdk8
-
+#install: mvn install -Dgpg.skip
+#
+# Build stages Beta.
+# See: https://docs.travis-ci.com/user/build-stages/
+jobs:
+  include:
+    # compile the sources
+    - stage: compile
+      script: mvn --batch-mode clean install -Dgpg.skip
+    # This will run certain combinations of parameters and configs.
+    # Note that it because of missing docker it can only run to the stage PREPARE.
+    - stage: smoketest
+      script:
+      # test markdown
+      - java -jar target/args2all-$VERSION-jar-with-dependencies.jar -c de.sfuhrm.args2all.Params -t MARKDOWN -o examples/args2all.md
+      # test manpage
+      - java -jar target/args2all-$VERSION-jar-with-dependencies.jar -c de.sfuhrm.args2all.Params -t MANPAGE -o examples/args2all.1
+stages:
+  - compile
+  - test
+  - smoketest
