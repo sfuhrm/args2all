@@ -24,6 +24,8 @@ import de.sfuhrm.args2all.model.ModelBase;
 import de.sfuhrm.args2all.model.ModelParameter;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -53,21 +55,7 @@ public final class ClassInspector {
                 .stream()
                 .forEach(
                     f -> {
-                        for (Annotation annotation
-                                : f.getDeclaredAnnotations()) {
-                            ModelParameter parameter = null;
-
-                            Mapping mapping = mapper.getClassMappings()
-                                    .get(annotation.annotationType());
-                            if (mapping != null) {
-                                parameter =
-                                        new ModelParameter(f);
-                                parameter.setValueClass(f.getType());
-                                parameter = mapping.createFrom(
-                                        parameter, annotation);
-                                result.getParameters().add(parameter);
-                            }
-                        }
+                        processField(result, f);
                     }
                 );
 
@@ -75,29 +63,61 @@ public final class ClassInspector {
                 .stream()
                 .forEach(
                         m -> {
-                            for (Annotation annotation
-                                    : m.getDeclaredAnnotations()) {
-                                ModelParameter parameter = null;
-
-                                Mapping mapping = mapper.getClassMappings()
-                                        .get(annotation.annotationType());
-                                if (mapping != null) {
-                                    parameter =
-                                            new ModelParameter(m);
-                                    int params = m.getParameterCount();
-                                    if (params >= 1) {
-                                        parameter.setValueClass(
-                                                m.getParameterTypes()[0]);
-                                    }
-                                    parameter = mapping.createFrom(
-                                            parameter, annotation);
-                                    result.getParameters().add(parameter);
-                                }
-                            }
+                            processMethod(result, m);
                         }
                 );
 
         Collections.sort(result.getParameters(), ModelBase.COMPARATOR);
         return result;
+    }
+
+    /** Processes a method and adds the results to the
+     * model.
+     * @param result the model to eventually add to.
+     * @param m the method to extract data from.
+     * */
+    private void processMethod(ModelBase result, Method m) {
+        for (Annotation annotation
+                : m.getDeclaredAnnotations()) {
+            ModelParameter parameter = null;
+
+            Mapping mapping = mapper.getClassMappings()
+                    .get(annotation.annotationType());
+            if (mapping != null) {
+                parameter =
+                        new ModelParameter(m);
+                int params = m.getParameterCount();
+                if (params >= 1) {
+                    parameter.setValueClass(
+                            m.getParameterTypes()[0]);
+                }
+                parameter = mapping.createFrom(
+                        parameter, annotation);
+                result.getParameters().add(parameter);
+            }
+        }
+    }
+
+    /** Processes a field and adds the results to the
+     * model.
+     * @param result the model to eventually add to.
+     * @param f the field to extract data from.
+     * */
+    private void processField(ModelBase result, Field f) {
+        for (Annotation annotation
+                : f.getDeclaredAnnotations()) {
+            ModelParameter parameter = null;
+
+            Mapping mapping = mapper.getClassMappings()
+                    .get(annotation.annotationType());
+            if (mapping != null) {
+                parameter =
+                        new ModelParameter(f);
+                parameter.setValueClass(f.getType());
+                parameter = mapping.createFrom(
+                        parameter, annotation);
+                result.getParameters().add(parameter);
+            }
+        }
     }
 }
