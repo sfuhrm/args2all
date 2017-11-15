@@ -10,19 +10,19 @@
 $PROGRAMNAME \- $PROGRAMDESCRIPTION
 .SH SYNOPSIS
 .B $PROGRAMNAME
-[\fIoptions\fR] <#if model.nameless.present>
-                \fI${model.nameless.get.valueName!argument}\fR
-</#if>
+[\fIoptions\fR] <#list model.nameless as param>
+                \fI${param.valueName!argument}\fR<#sep> </sep>
+</#list>
 
 .SH DESCRIPTION
 $DESCRIPTION
 
 .SH OPTIONS
 .TP
-<#if model.nameless.present>
-\fB${model.nameless.get.valueName!argument}\fR
-${model.nameless.get.description}
-</#if>
+<#list model.nameless as param>
+\fB${param.valueName!argument}\fR
+${param.description}
+</#list>
 
 <#list model.namefull as param>
 .TP
