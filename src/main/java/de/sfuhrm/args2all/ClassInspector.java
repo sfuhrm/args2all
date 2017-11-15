@@ -76,7 +76,8 @@ public final class ClassInspector {
      * @param result the model to eventually add to.
      * @param m the method to extract data from.
      * */
-    private void processMethod(ModelBase result, Method m) {
+    private void processMethod(final ModelBase result,
+                               final Method m) {
         for (Annotation annotation
                 : m.getDeclaredAnnotations()) {
             ModelParameter parameter = null;
@@ -103,7 +104,8 @@ public final class ClassInspector {
      * @param result the model to eventually add to.
      * @param f the field to extract data from.
      * */
-    private void processField(ModelBase result, Field f) {
+    private void processField(final ModelBase result,
+                              final Field f) {
         for (Annotation annotation
                 : f.getDeclaredAnnotations()) {
             ModelParameter parameter = null;
