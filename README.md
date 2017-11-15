@@ -9,6 +9,12 @@ The main purpose is to reduce overhead when documenting software.
 
 Two examples can be seen [below](#output-formats-supported).
 
+#### Command line parsing libraries supported
+
+Currently the following command line libraries are supported:
+* [Args4j](https://github.com/kohsuke/args4j)
+* [JCommander](https://github.com/cbeust/jcommander)
+
 ## Command line options
 
 Usage is as follows:
@@ -68,6 +74,14 @@ Here's an example of the program itself:
 ![Manpage example](https://raw.githubusercontent.com/sfuhrm/args2all/master/examples/manpage.png "Manpage example")
 
 Manpage code can be seen [here](https://raw.githubusercontent.com/sfuhrm/args2all/master/examples/args2all.1).
+
+
+### Warnings
+
+It is possible that the library versions used with Args2all are not
+compatible with the versions you're using in the classes you've compiled.
+To get around this problem, adjust the problematic library versions to
+be the same on both sides.
 
 ## License
 
