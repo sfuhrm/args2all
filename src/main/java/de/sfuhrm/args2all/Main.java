@@ -86,7 +86,6 @@ public final class Main {
     private void print(final ModelBase modelBase) throws
             ArgsException {
         Map<String, Object> environment = new HashMap<>();
-        environment.put("params", params);
         environment.put("model", modelBase);
         environment.put("main", this);
         try {
