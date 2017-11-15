@@ -42,10 +42,6 @@ public final class ClassInspectorTest {
 
         List<? super ModelParameter> expected = new ArrayList<>();
         ModelParameter modelParameter;
-        modelParameter = new ModelParameter(Args4jExample.class.getDeclaredField("arguments"));
-        modelParameter.setDescription("The list of planets to visit");
-        modelParameter.setValueClass(List.class);
-        expected.add(modelParameter);
         modelParameter = new ModelParameter(Args4jExample.class.getDeclaredField("myField"));
         modelParameter.setNames(Arrays.asList("-mars"));
         modelParameter.setValueClass(String.class);
@@ -53,6 +49,11 @@ public final class ClassInspectorTest {
         modelParameter = new ModelParameter(Args4jExample.class.getDeclaredField("myField2"));
         modelParameter.setNames(Arrays.asList("-saturn", "-uranus", "-jupiter"));
         modelParameter.setValueClass(Integer.class);
+        expected.add(modelParameter);
+        modelParameter = new ModelParameter(Args4jExample.class.getDeclaredField("arguments"));
+        modelParameter.setDescription("The list of planets to visit");
+        modelParameter.setValueClass(List.class);
+        modelParameter.setOrder(0);
         expected.add(modelParameter);
 
         assertEquals(Args4jExample.class, modelBase.getReference());
