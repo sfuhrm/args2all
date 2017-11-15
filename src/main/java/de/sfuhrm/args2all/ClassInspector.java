@@ -86,7 +86,8 @@ public final class ClassInspector {
                                             new ModelParameter(m);
                                     int params = m.getParameterCount();
                                     if (params >= 1) {
-                                        parameter.setValueClass(m.getParameterTypes()[0]);
+                                        parameter.setValueClass(
+                                                m.getParameterTypes()[0]);
                                     }
                                     parameter = mapping.createFrom(
                                             parameter, annotation);
