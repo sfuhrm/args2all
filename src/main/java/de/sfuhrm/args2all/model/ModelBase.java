@@ -26,7 +26,6 @@ import lombok.ToString;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /** Base for a class that has annotations from a command line parser.
