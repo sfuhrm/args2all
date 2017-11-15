@@ -60,7 +60,10 @@ final class Params {
         MARKDOWN("markdown.ftl"),
 
         /** Output in the Man page / troff format. */
-        MANPAGE("manpage.ftl");
+        MANPAGE("manpage.ftl"),
+
+        /** Output in the XML format. */
+        XML("xml.ftl");
 
         /** The name of the corresponding template file. */
         @Getter

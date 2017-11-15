@@ -18,6 +18,7 @@
 
 package de.sfuhrm.args2all;
 
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import de.sfuhrm.args2all.model.ModelBase;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -26,6 +27,7 @@ import freemarker.template.TemplateExceptionHandler;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
+import java.io.StringWriter;
 import java.io.Writer;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -52,12 +54,9 @@ public final class Main {
 
     /** Parse the referenced command line parser class and
      * print the results.
-     * @throws ClassNotFoundException if the referenced class was not found.
-     * @throws IOException if I/O went wrong.
-     * @throws TemplateException if there was a problem in template processing.
+     * @throws ArgsException if I/O went wrong.
      * */
-    private void parseAndPrint() throws ClassNotFoundException,
-            IOException, TemplateException {
+    private void parseAndPrint() throws ArgsException {
         ModelBase modelBase = parseModelBase();
         print(modelBase);
     }
@@ -65,49 +64,78 @@ public final class Main {
     /** Parse the referenced command line parser class.
      * @return the parsed command line parser directives, projected
      * into a generic parameter model.
-     * @throws ClassNotFoundException if the referenced class was not found.
+     * @throws ArgsException if the referenced class was not found.
      * */
     private ModelBase parseModelBase() throws
-            ClassNotFoundException {
-        Class<?> clazz = Main.class.getClassLoader()
-                .loadClass(params.getClassName());
+            ArgsException {
+        Class<?> clazz = null;
+        try {
+            clazz = Main.class.getClassLoader()
+                    .loadClass(params.getClassName());
+        } catch (ClassNotFoundException e) {
+            throw new ArgsException(e);
+        }
         ClassInspector classInspector = new ClassInspector();
         return classInspector.inspect(clazz);
     }
 
     /** Prints the template instantiation to the output.
      * @param modelBase the model to print.
-     * @throws IOException if some I/O goes wrong.
-     * @throws TemplateException if there is a problem with the template.
+     * @throws ArgsException if some I/O goes wrong.
      * */
     private void print(final ModelBase modelBase) throws
-            IOException,
-            TemplateException {
+            ArgsException {
         Map<String, Object> environment = new HashMap<>();
+        environment.put("params", params);
         environment.put("model", modelBase);
-        Charset charset = Charset.forName(params.getCharset());
-        Configuration cfg = new Configuration(Configuration.VERSION_2_3_23);
-        cfg.setClassForTemplateLoading(getClass(), "/templates");
-        cfg.setDefaultEncoding(charset.name());
-        cfg.setTemplateExceptionHandler(
-                TemplateExceptionHandler.RETHROW_HANDLER);
-        cfg.setLogTemplateExceptions(false);
-        cfg.setLocale(Locale.US);
-        Template temp = cfg.getTemplate(params.getTemplate().getTemplateName());
-        try (Writer out = Files.newBufferedWriter(params.getOut(), charset)) {
-            temp.process(environment, out);
+        environment.put("main", this);
+        try {
+            Charset charset = Charset.forName(
+                    params.getCharset());
+            Configuration cfg = new Configuration(
+                    Configuration.VERSION_2_3_23);
+            cfg.setClassForTemplateLoading(getClass(),
+                    "/templates");
+            cfg.setDefaultEncoding(charset.name());
+            cfg.setTemplateExceptionHandler(
+                    TemplateExceptionHandler.RETHROW_HANDLER);
+            cfg.setLogTemplateExceptions(false);
+            cfg.setLocale(Locale.US);
+            Template temp = cfg.getTemplate(
+                    params.getTemplate().getTemplateName());
+            try (Writer out = Files.newBufferedWriter(
+                    params.getOut(), charset)) {
+                temp.process(environment, out);
+            }
+        } catch (IOException
+                | TemplateException e) {
+            throw new ArgsException(e);
         }
+    }
+
+    /**
+     * Writes the model to XML.
+     * @param modelBase the model to write.
+     * @return the serialized XML content.
+     * @throws ArgsException if writing happens to be a problem.
+     * */
+    public String toXml(final ModelBase modelBase)
+            throws ArgsException {
+        XmlMapper xmlMapper = new XmlMapper();
+        StringWriter stringWriter = new StringWriter();
+        try {
+            xmlMapper.writeValue(stringWriter, modelBase);
+        } catch (IOException e) {
+            throw new ArgsException(e);
+        }
+        return stringWriter.toString();
     }
 
     /** Main entry point of the method.
      * @param args the command line arguments.
-     * @throws ClassNotFoundException if the given class was not found.
-     * @throws IOException if some I/O goes wrong.
-     * @throws TemplateException if there is a problem with the template.
+     * @throws ArgsException if some I/O goes wrong.
      * */
-    public static void main(final String[] args) throws ClassNotFoundException,
-            IOException,
-            TemplateException {
+    public static void main(final String[] args) throws ArgsException {
         Params params = Params.parse(args);
         if (params != null) {
             Main main = new Main(params);
