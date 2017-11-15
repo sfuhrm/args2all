@@ -41,6 +41,8 @@ final class JCommanderParameterMapping extends Mapping<Parameter> {
         modelParameter.setDescription(emptyIsNull(parameter.description()));
         modelParameter.setRequired(parameter.required());
         modelParameter.setOrder(parameter.order());
+        modelParameter.setHidden(parameter.hidden());
+        modelParameter.setHelp(parameter.help());
         return modelParameter;
     }
 }

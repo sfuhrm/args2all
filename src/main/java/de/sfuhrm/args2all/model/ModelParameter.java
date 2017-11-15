@@ -57,6 +57,14 @@ public class ModelParameter {
     @Getter @Setter
     private String valueName;
 
+    /** What is this a help option? */
+    @Getter @Setter
+    private boolean help;
+
+    /** What is this a hidden option? */
+    @Getter @Setter
+    private boolean hidden;
+
     /** The value class for this parameter. */
     @Getter @Setter
     private Class<?> valueClass;

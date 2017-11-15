@@ -37,6 +37,8 @@ final class Args4jArgumentMapping extends Mapping<Argument> {
         modelParameter.setDescription(emptyIsNull(parameter.usage()));
         modelParameter.setRequired(parameter.required());
         modelParameter.setValueName(emptyIsNull(parameter.metaVar()));
+        modelParameter.setHidden(parameter.hidden());
+        modelParameter.setOrder(parameter.index());
         return modelParameter;
     }
 }

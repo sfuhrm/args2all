@@ -45,6 +45,8 @@ final class Args4jOptionMapping extends Mapping<Option> {
         modelParameter.setDescription(emptyIsNull(parameter.usage()));
         modelParameter.setRequired(parameter.required());
         modelParameter.setValueName(emptyIsNull(parameter.metaVar()));
+        modelParameter.setHidden(parameter.hidden());
+        modelParameter.setHelp(parameter.help());
         return modelParameter;
     }
 }
