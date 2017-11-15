@@ -3,7 +3,6 @@ package de.sfuhrm.args2all.mapping;
 import com.beust.jcommander.Parameter;
 import de.sfuhrm.args2all.model.ModelParameter;
 
-import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -19,18 +18,12 @@ final class JCommanderParameterMapping extends Mapping<Parameter> {
     }
 
     @Override
-    public ModelParameter createFrom(final Field field,
+    public ModelParameter createFrom(final ModelParameter modelParameter,
                                      final Parameter parameter) {
-        ModelParameter modelParameter;
-        if (parameter.names().length > 0) {
-            modelParameter = new ModelParameter(field);
-            (modelParameter)
+        modelParameter
                     .setNames(Arrays.asList(parameter.names())
                             .stream()
                             .collect(Collectors.toList()));
-        } else {
-            modelParameter = new ModelParameter(field);
-        }
         modelParameter.setDescription(emptyIsNull(parameter.description()));
         modelParameter.setRequired(parameter.required());
         modelParameter.setOrder(parameter.order());

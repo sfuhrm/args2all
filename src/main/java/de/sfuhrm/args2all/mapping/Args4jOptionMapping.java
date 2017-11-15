@@ -3,7 +3,6 @@ package de.sfuhrm.args2all.mapping;
 import de.sfuhrm.args2all.model.ModelParameter;
 import org.kohsuke.args4j.Option;
 
-import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -19,9 +18,8 @@ final class Args4jOptionMapping extends Mapping<Option> {
     }
 
     @Override
-    public ModelParameter createFrom(final Field field,
+    public ModelParameter createFrom(final ModelParameter modelParameter,
                                      final Option parameter) {
-        ModelParameter modelParameter = new ModelParameter(field);
         modelParameter.getNames().add(parameter.name());
         if (parameter.aliases() != null) {
             modelParameter.getNames().addAll(Arrays.asList(parameter.aliases())

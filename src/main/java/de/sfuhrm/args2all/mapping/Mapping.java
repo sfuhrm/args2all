@@ -4,7 +4,6 @@ import de.sfuhrm.args2all.model.ModelParameter;
 import lombok.Getter;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
 import java.util.Objects;
 
 /** Maps one single annotation class to a {@linkplain ModelParameter}.
@@ -25,12 +24,13 @@ public abstract class Mapping<U extends Annotation> {
     }
 
     /** Creates a model parameter from an field annotation.
-     * @param f the field to create an model for.
+     * @param modelParameter the model parameter to write the data to.
      * @param annotation the fields annotation to fill the
      *                   model with.
      * @return the created model parameter object.
      * */
-    public abstract ModelParameter createFrom(Field f, U annotation);
+    public abstract ModelParameter createFrom(
+            ModelParameter modelParameter, U annotation);
 
     /** Maps the empty String to {@code null}.
      * @param in the String to map.

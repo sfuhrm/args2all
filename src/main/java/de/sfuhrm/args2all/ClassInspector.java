@@ -41,8 +41,11 @@ public final class ClassInspector {
                             Mapping mapping = mapper.getClassMappings()
                                     .get(annotation.annotationType());
                             if (mapping != null) {
-                                parameter = mapping.createFrom(f, annotation);
+                                parameter =
+                                        new ModelParameter(f);
                                 parameter.setValueClass(f.getType());
+                                parameter = mapping.createFrom(
+                                        parameter, annotation);
                                 result.getParameters().add(parameter);
                             }
                         }

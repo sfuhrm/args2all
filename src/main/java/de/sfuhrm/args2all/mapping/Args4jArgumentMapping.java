@@ -3,8 +3,6 @@ package de.sfuhrm.args2all.mapping;
 import de.sfuhrm.args2all.model.ModelParameter;
 import org.kohsuke.args4j.Argument;
 
-import java.lang.reflect.Field;
-
 /**
  * Mapping for {@linkplain Argument}.
  * @author Stephan Fuhrmann
@@ -17,9 +15,8 @@ final class Args4jArgumentMapping extends Mapping<Argument> {
     }
 
     @Override
-    public ModelParameter createFrom(final Field field,
+    public ModelParameter createFrom(final ModelParameter modelParameter,
                                      final Argument parameter) {
-        ModelParameter modelParameter = new ModelParameter(field);
         modelParameter.setDescription(emptyIsNull(parameter.usage()));
         modelParameter.setRequired(parameter.required());
         modelParameter.setValueName(emptyIsNull(parameter.metaVar()));
