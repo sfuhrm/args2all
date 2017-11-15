@@ -21,7 +21,6 @@ import de.sfuhrm.args2all.model.ModelParameter;
 import org.kohsuke.args4j.Option;
 
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 /**
  * Mapping for {@linkplain Option}.
