@@ -17,7 +17,7 @@
  */
 package de.sfuhrm.args2all.model;
 
-import de.sfuhrm.args2all.Args4jExample;
+import de.sfuhrm.args2all.Args4jExampleWithFields;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
@@ -39,13 +39,13 @@ public final class ModelBaseTest {
     public void testComparatorWithNoChange() throws NoSuchFieldException {
 
         List<ModelParameter> unsorted = new ArrayList<>();
-        ModelParameter first = new ModelParameter(Args4jExample.class.getDeclaredField("myField"));
+        ModelParameter first = new ModelParameter(Args4jExampleWithFields.class.getDeclaredField("myField"));
         first.setNames(Arrays.asList("-mars"));
         first.setValueClass(String.class);
 
         unsorted.add(first);
 
-        ModelParameter second = new ModelParameter(Args4jExample.class.getDeclaredField("myField2"));
+        ModelParameter second = new ModelParameter(Args4jExampleWithFields.class.getDeclaredField("myField2"));
         second.setNames(Arrays.asList("-saturn", "--uranus", "--jupiter"));
         second.setValueClass(Integer.class);
         unsorted.add(first);
@@ -61,13 +61,13 @@ public final class ModelBaseTest {
     public void testComparatorWithChange() throws NoSuchFieldException {
 
         List<ModelParameter> unsorted = new ArrayList<>();
-        ModelParameter first = new ModelParameter(Args4jExample.class.getDeclaredField("myField"));
+        ModelParameter first = new ModelParameter(Args4jExampleWithFields.class.getDeclaredField("myField"));
         first.setNames(Arrays.asList("-zodiak"));
         first.setValueClass(String.class);
 
         unsorted.add(first);
 
-        ModelParameter second = new ModelParameter(Args4jExample.class.getDeclaredField("myField2"));
+        ModelParameter second = new ModelParameter(Args4jExampleWithFields.class.getDeclaredField("myField2"));
         second.setNames(Arrays.asList("-saturn", "-uranus", "-jupiter"));
         second.setValueClass(Integer.class);
         unsorted.add(second);
@@ -84,14 +84,14 @@ public final class ModelBaseTest {
     public void testComparatorWithOrder() throws NoSuchFieldException {
 
         List<ModelParameter> unsorted = new ArrayList<>();
-        ModelParameter first = new ModelParameter(Args4jExample.class.getDeclaredField("myField"));
+        ModelParameter first = new ModelParameter(Args4jExampleWithFields.class.getDeclaredField("myField"));
         first.setNames(Arrays.asList("-zodiak"));
         first.setValueClass(String.class);
         first.setOrder(0);
 
         unsorted.add(first);
 
-        ModelParameter second = new ModelParameter(Args4jExample.class.getDeclaredField("myField2"));
+        ModelParameter second = new ModelParameter(Args4jExampleWithFields.class.getDeclaredField("myField2"));
         second.setNames(Arrays.asList("-saturn", "-uranus", "-jupiter"));
         second.setValueClass(Integer.class);
         second.setOrder(1);

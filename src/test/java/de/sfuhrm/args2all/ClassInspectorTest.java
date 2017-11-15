@@ -38,41 +38,41 @@ public final class ClassInspectorTest {
     @Test
     public void testInspectWithArgs4j() throws NoSuchFieldException {
         ClassInspector classInspector = new ClassInspector();
-        ModelBase modelBase = classInspector.inspect(Args4jExample.class);
+        ModelBase modelBase = classInspector.inspect(Args4jExampleWithFields.class);
 
         List<? super ModelParameter> expected = new ArrayList<>();
         ModelParameter modelParameter;
-        modelParameter = new ModelParameter(Args4jExample.class.getDeclaredField("myField"));
+        modelParameter = new ModelParameter(Args4jExampleWithFields.class.getDeclaredField("myField"));
         modelParameter.setNames(Arrays.asList("-mars"));
         modelParameter.setValueClass(String.class);
         expected.add(modelParameter);
-        modelParameter = new ModelParameter(Args4jExample.class.getDeclaredField("myField2"));
+        modelParameter = new ModelParameter(Args4jExampleWithFields.class.getDeclaredField("myField2"));
         modelParameter.setNames(Arrays.asList("-saturn", "-uranus", "-jupiter"));
         modelParameter.setValueClass(Integer.class);
         expected.add(modelParameter);
-        modelParameter = new ModelParameter(Args4jExample.class.getDeclaredField("arguments"));
+        modelParameter = new ModelParameter(Args4jExampleWithFields.class.getDeclaredField("arguments"));
         modelParameter.setDescription("The list of planets to visit");
         modelParameter.setValueClass(List.class);
         modelParameter.setOrder(0);
         expected.add(modelParameter);
 
-        assertEquals(Args4jExample.class, modelBase.getReference());
+        assertEquals(Args4jExampleWithFields.class, modelBase.getReference());
         assertEquals(expected, modelBase.getParameters());
     }
 
     @Test
     public void testInspectWithArgs4jAndMethods() throws NoSuchMethodException {
         ClassInspector classInspector = new ClassInspector();
-        ModelBase modelBase = classInspector.inspect(Args4jExample2.class);
+        ModelBase modelBase = classInspector.inspect(Args4jExampleWithMethod.class);
 
         List<? super ModelParameter> expected = new ArrayList<>();
         ModelParameter modelParameter;
-        modelParameter = new ModelParameter(Args4jExample2.class.getDeclaredMethod("setFoo", String.class));
+        modelParameter = new ModelParameter(Args4jExampleWithMethod.class.getDeclaredMethod("setFoo", String.class));
         modelParameter.setNames(Arrays.asList("-mars"));
         modelParameter.setValueClass(String.class);
         expected.add(modelParameter);
 
-        assertEquals(Args4jExample2.class, modelBase.getReference());
+        assertEquals(Args4jExampleWithMethod.class, modelBase.getReference());
         assertEquals(expected, modelBase.getParameters());
     }
 

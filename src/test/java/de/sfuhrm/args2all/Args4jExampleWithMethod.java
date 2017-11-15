@@ -25,20 +25,14 @@ import org.kohsuke.args4j.Option;
 import java.util.List;
 
 /**
- * Example class for args4j.
+ * Example class for args4j with setter method.
  * @author Stephan Fuhrmann
  * */
-public class Args4jExample {
-    @Getter @Setter
-    @Option(name = "-mars")
+public class Args4jExampleWithMethod {
     private String myField;
 
-    @Getter @Setter
-    @Option(name = "-saturn", aliases = {"-uranus", "-jupiter"})
-    private Integer myField2;
-
-    // unnamed
-    @Getter @Setter
-    @Argument(usage = "The list of planets to visit")
-    private List<String> arguments;
+    @Option(name = "-mars")
+    public void setFoo(String bar) {
+        this.myField = bar;
+    }
 }
