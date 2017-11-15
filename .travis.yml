@@ -21,6 +21,8 @@ jobs:
       - java -jar target/args2all-$VERSION-jar-with-dependencies.jar -c de.sfuhrm.args2all.Params -t MARKDOWN -o examples/args2all.md
       # test manpage
       - java -jar target/args2all-$VERSION-jar-with-dependencies.jar -c de.sfuhrm.args2all.Params -t MANPAGE -o examples/args2all.1
+      # test xml
+      - java -jar target/args2all-$VERSION-jar-with-dependencies.jar -c de.sfuhrm.args2all.Params -t XML -o examples/args2all.xml
 stages:
   - compile
   - test
