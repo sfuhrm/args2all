@@ -61,6 +61,22 @@ public final class ClassInspectorTest {
     }
 
     @Test
+    public void testInspectWithArgs4jAndMethods() throws NoSuchMethodException {
+        ClassInspector classInspector = new ClassInspector();
+        ModelBase modelBase = classInspector.inspect(Args4jExample2.class);
+
+        List<? super ModelParameter> expected = new ArrayList<>();
+        ModelParameter modelParameter;
+        modelParameter = new ModelParameter(Args4jExample2.class.getDeclaredMethod("setFoo", String.class));
+        modelParameter.setNames(Arrays.asList("-mars"));
+        modelParameter.setValueClass(String.class);
+        expected.add(modelParameter);
+
+        assertEquals(Args4jExample2.class, modelBase.getReference());
+        assertEquals(expected, modelBase.getParameters());
+    }
+
+    @Test
     public void testInspectWithJCommander() throws NoSuchFieldException {
         ClassInspector classInspector = new ClassInspector();
         ModelBase modelBase = classInspector.inspect(JCommanderExample.class);

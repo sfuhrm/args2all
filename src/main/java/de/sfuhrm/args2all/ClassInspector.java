@@ -71,6 +71,31 @@ public final class ClassInspector {
                     }
                 );
 
+        Arrays.asList(clazz.getDeclaredMethods())
+                .stream()
+                .forEach(
+                        m -> {
+                            for (Annotation annotation
+                                    : m.getDeclaredAnnotations()) {
+                                ModelParameter parameter = null;
+
+                                Mapping mapping = mapper.getClassMappings()
+                                        .get(annotation.annotationType());
+                                if (mapping != null) {
+                                    parameter =
+                                            new ModelParameter(m);
+                                    int params = m.getParameterCount();
+                                    if (params >= 1) {
+                                        parameter.setValueClass(m.getParameterTypes()[0]);
+                                    }
+                                    parameter = mapping.createFrom(
+                                            parameter, annotation);
+                                    result.getParameters().add(parameter);
+                                }
+                            }
+                        }
+                );
+
         Collections.sort(result.getParameters(), ModelBase.COMPARATOR);
         return result;
     }

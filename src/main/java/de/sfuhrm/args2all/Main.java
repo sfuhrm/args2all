@@ -42,7 +42,7 @@ import java.util.Objects;
 @Slf4j
 public final class Main {
 
-    /** The command line parameters for easier reference. */
+    /** The command line parameters for easier field. */
     private final Params params;
 
     /** Internal invocation only.

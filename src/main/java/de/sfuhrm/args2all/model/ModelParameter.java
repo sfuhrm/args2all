@@ -24,6 +24,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -39,7 +40,14 @@ public class ModelParameter {
      * */
     @Getter
     @Setter
-    private Field reference;
+    private Field field;
+
+    /** The method this parameter belongs to.
+     * TBD should be the field name instead?
+     * */
+    @Getter
+    @Setter
+    private Method method;
 
     /** The names in the command line for this field. */
     @Getter @Setter
@@ -77,7 +85,15 @@ public class ModelParameter {
      * @param myReference the field this parameter belongs to.
      * */
     public ModelParameter(final Field myReference) {
-        this.reference = Objects.requireNonNull(myReference);
+        this.field = Objects.requireNonNull(myReference);
+        this.names = new ArrayList<>();
+    }
+
+    /** Creates a new instance of the parameter.
+     * @param myReference the field this parameter belongs to.
+     * */
+    public ModelParameter(final Method myReference) {
+        this.method = Objects.requireNonNull(myReference);
         this.names = new ArrayList<>();
     }
 }
