@@ -22,9 +22,8 @@ final class Args4jOptionMapping extends Mapping<Option> {
                                      final Option parameter) {
         modelParameter.getNames().add(parameter.name());
         if (parameter.aliases() != null) {
-            modelParameter.getNames().addAll(Arrays.asList(parameter.aliases())
-                    .stream()
-                    .collect(Collectors.toList()));
+            modelParameter.getNames().addAll(
+                    Arrays.asList(parameter.aliases()));
         }
         modelParameter.setDescription(emptyIsNull(parameter.usage()));
         modelParameter.setRequired(parameter.required());

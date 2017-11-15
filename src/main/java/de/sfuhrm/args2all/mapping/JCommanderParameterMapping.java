@@ -21,9 +21,7 @@ final class JCommanderParameterMapping extends Mapping<Parameter> {
     public ModelParameter createFrom(final ModelParameter modelParameter,
                                      final Parameter parameter) {
         modelParameter
-                    .setNames(Arrays.asList(parameter.names())
-                            .stream()
-                            .collect(Collectors.toList()));
+                    .setNames(Arrays.asList(parameter.names()));
         modelParameter.setDescription(emptyIsNull(parameter.description()));
         modelParameter.setRequired(parameter.required());
         modelParameter.setOrder(parameter.order());
