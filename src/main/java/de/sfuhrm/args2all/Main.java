@@ -35,6 +35,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /** Main entry point for the program.
+ * @author Stephan Fuhrmann
  * */
 @Slf4j
 public final class Main {

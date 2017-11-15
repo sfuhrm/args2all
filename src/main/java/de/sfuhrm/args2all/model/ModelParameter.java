@@ -28,7 +28,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/** A parameter associated to a field. */
+/** A parameter associated to a field.
+ * @author Stephan Fuhrmann
+ * */
 @EqualsAndHashCode()
 @ToString
 public class ModelParameter {

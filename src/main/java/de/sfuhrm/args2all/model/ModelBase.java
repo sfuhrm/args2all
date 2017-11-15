@@ -30,6 +30,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /** Base for a class that has annotations from a command line parser.
+ * @author Stephan Fuhrmann
  * */
 @EqualsAndHashCode()
 @ToString

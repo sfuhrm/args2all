@@ -24,6 +24,10 @@ import org.kohsuke.args4j.Option;
 
 import java.util.List;
 
+/**
+ * Example class for args4j.
+ * @author Stephan Fuhrmann
+ * */
 public class Args4jExample {
     @Getter @Setter
     @Option(name = "-mars")

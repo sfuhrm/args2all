@@ -29,6 +29,7 @@ import java.util.Collections;
 
 /** Converts command line parser specific POJO classes to the
  * generic model format.
+ * @author Stephan Fuhrmann
  * @see ModelBase
  * */
 public final class ClassInspector {

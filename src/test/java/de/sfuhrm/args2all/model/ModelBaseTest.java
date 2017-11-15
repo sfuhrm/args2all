@@ -28,6 +28,10 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Unit test for {@linkplain ModelBase#COMPARATOR}.
+ * @author Stephan Fuhrmann
+ */
 @Slf4j
 public final class ModelBaseTest {
 

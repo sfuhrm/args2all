@@ -28,6 +28,10 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * Test for the {@linkplain ClassInspector}.
+ * @author Stephan Fuhrmann
+ * */
 @Slf4j
 public final class ClassInspectorTest {
 

@@ -25,6 +25,10 @@ import org.kohsuke.args4j.Option;
 
 import java.util.List;
 
+/**
+ * Example class for JCommander.
+ * @author Stephan Fuhrmann
+ * */
 public class JCommanderExample {
     @Getter @Setter
     @Parameter(names = "-mars", order = 1)
