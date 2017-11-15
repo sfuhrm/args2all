@@ -50,7 +50,9 @@ public class Mapper {
         mappings = Arrays.asList(
                 new Args4jArgumentMapping(),
                 new Args4jOptionMapping(),
-                new JCommanderParameterMapping()
+                new JCommanderParameterMapping(),
+                new PicoCliOptionMapping(),
+                new PicoCliParametersMapping()
         );
 
         Map<Class<? extends Annotation>, Mapping> map = mappings
