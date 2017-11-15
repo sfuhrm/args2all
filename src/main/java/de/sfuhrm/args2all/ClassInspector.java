@@ -22,6 +22,7 @@ import de.sfuhrm.args2all.mapping.Mapper;
 import de.sfuhrm.args2all.mapping.Mapping;
 import de.sfuhrm.args2all.model.ModelBase;
 import de.sfuhrm.args2all.model.ModelParameter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -34,6 +35,7 @@ import java.util.Collections;
  * @author Stephan Fuhrmann
  * @see ModelBase
  * */
+@Slf4j
 public final class ClassInspector {
 
     /** The mapper from annotation classes to {@link ModelParameter}. */
@@ -55,6 +57,7 @@ public final class ClassInspector {
                 .stream()
                 .forEach(
                     f -> {
+                        log.debug("Processing field {}", f.getName());
                         processField(result, f);
                     }
                 );
@@ -63,6 +66,7 @@ public final class ClassInspector {
                 .stream()
                 .forEach(
                         m -> {
+                            log.debug("Processing method {}", m.getName());
                             processMethod(result, m);
                         }
                 );
