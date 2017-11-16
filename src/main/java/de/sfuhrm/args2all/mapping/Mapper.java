@@ -44,7 +44,7 @@ public class Mapper {
      * installed.
      * */
     public Mapper() {
-        List<Mapping> mappings = Arrays.asList(
+        List<Mapping<?>> mappings = Arrays.asList(
                 new Args4jArgumentMapping(),
                 new Args4jOptionMapping(),
                 new JCommanderParameterMapping(),
@@ -52,7 +52,7 @@ public class Mapper {
                 new PicoCliParametersMapping()
         );
 
-        Map<Class<? extends Annotation>, Mapping> map = mappings
+        Map<Class<? extends Annotation>, Mapping<?>> map = mappings
                 .stream()
                 .collect(Collectors.toMap(
                         p -> p.getAnnotationClass(), p -> p));
