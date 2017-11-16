@@ -75,7 +75,7 @@ final class Params {
         Template(final String myTemplateName) {
             this.templateName = Objects.requireNonNull(myTemplateName);
         }
-    };
+    }
 
     /** The template to use for output.  */
     @Getter
