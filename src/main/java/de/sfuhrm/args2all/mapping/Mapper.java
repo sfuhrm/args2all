@@ -33,9 +33,6 @@ import java.util.stream.Collectors;
  * */
 public class Mapper {
 
-    /** The list of mappings. */
-    private final List<Mapping> mappings;
-
     /** Associative map with the key being the
      * annotation class and the value being the mapping
      * itself.
@@ -47,7 +44,7 @@ public class Mapper {
      * installed.
      * */
     public Mapper() {
-        mappings = Arrays.asList(
+        List<Mapping> mappings = Arrays.asList(
                 new Args4jArgumentMapping(),
                 new Args4jOptionMapping(),
                 new JCommanderParameterMapping(),
