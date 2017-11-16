@@ -37,8 +37,7 @@ final class PicoCliOptionMapping extends Mapping<CommandLine.Option> {
     @Override
     public ModelParameter createFrom(final ModelParameter modelParameter,
                                      final CommandLine.Option parameter) {
-        modelParameter.setDescription(Arrays.asList(parameter.description())
-                .stream()
+        modelParameter.setDescription(Arrays.stream(parameter.description())
                 .collect(Collectors.joining("\n"))
         );
         modelParameter.setHidden(parameter.hidden());

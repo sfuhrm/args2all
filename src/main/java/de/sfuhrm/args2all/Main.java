@@ -69,7 +69,7 @@ public final class Main {
      * */
     private ModelBase parseModelBase() throws
             ArgsException {
-        Class<?> clazz = null;
+        Class<?> clazz;
         try {
             clazz = Main.class.getClassLoader()
                     .loadClass(params.getClassName());

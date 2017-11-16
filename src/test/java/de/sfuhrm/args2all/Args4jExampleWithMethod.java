@@ -17,12 +17,7 @@
  */
 package de.sfuhrm.args2all;
 
-import lombok.Getter;
-import lombok.Setter;
-import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.Option;
-
-import java.util.List;
 
 /**
  * Example class for args4j with setter method.

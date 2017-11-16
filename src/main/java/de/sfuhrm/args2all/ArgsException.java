@@ -20,11 +20,11 @@ package de.sfuhrm.args2all;
 /** Application exception.
  * @author Stephan Fuhrmann
  * */
-public class ArgsException extends Exception {
+class ArgsException extends Exception {
     /** Creates a new instance with a cause.
      * @param cause the throwable that was the cause for this exception.
      * */
-    public ArgsException(final Throwable cause) {
+    ArgsException(final Throwable cause) {
         super(cause);
     }
 
@@ -32,7 +32,7 @@ public class ArgsException extends Exception {
      * @param message the message about this exception.
      * @param cause the throwable that was the cause for this exception.
      * */
-    public ArgsException(final String message, final Throwable cause) {
+    ArgsException(final String message, final Throwable cause) {
         super(message, cause);
     }
 }

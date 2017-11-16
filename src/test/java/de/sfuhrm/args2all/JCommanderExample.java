@@ -20,8 +20,6 @@ package de.sfuhrm.args2all;
 import com.beust.jcommander.Parameter;
 import lombok.Getter;
 import lombok.Setter;
-import org.kohsuke.args4j.Argument;
-import org.kohsuke.args4j.Option;
 
 import java.util.List;
 
@@ -29,7 +27,7 @@ import java.util.List;
  * Example class for JCommander.
  * @author Stephan Fuhrmann
  * */
-public class JCommanderExample {
+class JCommanderExample {
     @Getter @Setter
     @Parameter(names = "-mars", order = 1)
     private String myField;

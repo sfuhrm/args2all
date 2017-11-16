@@ -59,9 +59,7 @@ public final class ModelBase {
      * */
     public boolean hasNameless() {
         return parameters.stream()
-                .filter(p -> p.getClass().equals(ModelParameter.class))
-                .findFirst()
-                .isPresent();
+                .anyMatch(p -> p.getClass().equals(ModelParameter.class));
     }
 
     /** Get the nameless parameter.
@@ -81,10 +79,9 @@ public final class ModelBase {
      * @return the namefull parameters.
      * */
     public List<ModelParameter> getNamefull() {
-        List<ModelParameter> result = parameters.stream()
+        return parameters.stream()
                 .filter(p -> !p.getNames().isEmpty())
                 .collect(Collectors.toList());
-        return result;
     }
 
     /** The comparator used to order the named model parameters.

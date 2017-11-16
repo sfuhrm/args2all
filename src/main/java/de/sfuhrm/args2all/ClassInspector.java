@@ -28,7 +28,6 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Arrays;
-import java.util.Collections;
 
 /** Converts command line parser specific POJO classes to the
  * generic model format.
@@ -36,13 +35,13 @@ import java.util.Collections;
  * @see ModelBase
  * */
 @Slf4j
-public final class ClassInspector {
+final class ClassInspector {
 
     /** The mapper from annotation classes to {@link ModelParameter}. */
-    private Mapper mapper;
+    private final Mapper mapper;
 
     /** Constructs a new class inspector. */
-    public ClassInspector() {
+    ClassInspector() {
         mapper = new Mapper();
     }
 
@@ -54,7 +53,6 @@ public final class ClassInspector {
         ModelBase result = new ModelBase();
         result.setReference(clazz);
         Arrays.asList(clazz.getDeclaredFields())
-                .stream()
                 .forEach(
                     f -> {
                         log.debug("Processing field {}", f.getName());
@@ -63,7 +61,6 @@ public final class ClassInspector {
                 );
 
         Arrays.asList(clazz.getDeclaredMethods())
-                .stream()
                 .forEach(
                         m -> {
                             log.debug("Processing method {}", m.getName());
@@ -71,7 +68,7 @@ public final class ClassInspector {
                         }
                 );
 
-        Collections.sort(result.getParameters(), ModelBase.COMPARATOR);
+        result.getParameters().sort(ModelBase.COMPARATOR);
         return result;
     }
 
@@ -84,9 +81,9 @@ public final class ClassInspector {
                                final Method m) {
         for (Annotation annotation
                 : m.getDeclaredAnnotations()) {
-            ModelParameter parameter = null;
+            ModelParameter parameter;
 
-            Mapping mapping = mapper.getClassMappings()
+            Mapping<Annotation> mapping = mapper.getClassMappings()
                     .get(annotation.annotationType());
             if (mapping != null) {
                 parameter =
@@ -112,7 +109,7 @@ public final class ClassInspector {
                               final Field f) {
         for (Annotation annotation
                 : f.getDeclaredAnnotations()) {
-            ModelParameter parameter = null;
+            ModelParameter parameter;
 
             Mapping mapping = mapper.getClassMappings()
                     .get(annotation.annotationType());

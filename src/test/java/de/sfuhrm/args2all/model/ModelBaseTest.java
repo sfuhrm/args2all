@@ -40,7 +40,7 @@ public final class ModelBaseTest {
 
         List<ModelParameter> unsorted = new ArrayList<>();
         ModelParameter first = new ModelParameter(Args4jExampleWithFields.class.getDeclaredField("myField"));
-        first.setNames(Arrays.asList("-mars"));
+        first.setNames(Collections.singletonList("-mars"));
         first.setValueClass(String.class);
 
         unsorted.add(first);
@@ -51,7 +51,7 @@ public final class ModelBaseTest {
         unsorted.add(first);
 
         List<ModelParameter> sortMe = new ArrayList<>(unsorted);
-        Collections.sort(sortMe, ModelBase.COMPARATOR);
+        sortMe.sort(ModelBase.COMPARATOR);
 
         // expecting no change, -mars is before -saturn in alphabet
         assertEquals(unsorted, sortMe);
@@ -62,7 +62,7 @@ public final class ModelBaseTest {
 
         List<ModelParameter> unsorted = new ArrayList<>();
         ModelParameter first = new ModelParameter(Args4jExampleWithFields.class.getDeclaredField("myField"));
-        first.setNames(Arrays.asList("-zodiak"));
+        first.setNames(Collections.singletonList("-zodiak"));
         first.setValueClass(String.class);
 
         unsorted.add(first);
@@ -73,7 +73,7 @@ public final class ModelBaseTest {
         unsorted.add(second);
 
         List<ModelParameter> sortMe = new ArrayList<>(unsorted);
-        Collections.sort(sortMe, ModelBase.COMPARATOR);
+        sortMe.sort(ModelBase.COMPARATOR);
 
         List<ModelParameter> expected = Arrays.asList(second, first);
         // expecting first saturn, then zodiak
@@ -85,7 +85,7 @@ public final class ModelBaseTest {
 
         List<ModelParameter> unsorted = new ArrayList<>();
         ModelParameter first = new ModelParameter(Args4jExampleWithFields.class.getDeclaredField("myField"));
-        first.setNames(Arrays.asList("-zodiak"));
+        first.setNames(Collections.singletonList("-zodiak"));
         first.setValueClass(String.class);
         first.setOrder(0);
 
@@ -98,7 +98,7 @@ public final class ModelBaseTest {
         unsorted.add(second);
 
         List<ModelParameter> sortMe = new ArrayList<>(unsorted);
-        Collections.sort(sortMe, ModelBase.COMPARATOR);
+        sortMe.sort(ModelBase.COMPARATOR);
 
         List<ModelParameter> expected = Arrays.asList(first, second);
         // expecting first zodiak (by order), then saturn
