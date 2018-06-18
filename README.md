@@ -1,4 +1,7 @@
-# Args2All ![Travis CI Status](https://travis-ci.org/sfuhrm/capsula.svg?branch=master) [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
+Args2All
+===================
+![Travis CI Status](https://travis-ci.org/sfuhrm/capsula.svg?branch=master)
+[![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 
 Converts machine readable command line parser library class annotations (args4j, JCommander)
 into a variety of human readable text documents. To put it in other words: You document
